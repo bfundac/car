@@ -1,0 +1,61 @@
+
+build:
+
+  gpu: true
+
+  cuda: "12.1"
+
+  system_packages:
+
+    - "ffmpeg"
+
+    - "libgl1-mesa-glx"  # OpenCV 需要的系统库
+
+    - "libglib2.0-0"
+
+  python_version: "3.11"
+
+  python_packages:
+
+    - "torch==2.3.1"
+
+    - "torchvision"
+
+    - "torchaudio"
+
+    - "pydantic<2.0"       # 核心版本锁
+
+    - "numpy<2"            # 核心版本锁
+
+    - "hydra-core"         # SAM2 依赖
+
+    - "transformers>=4.38.0"
+
+    - "huggingface_hub"
+
+    - "scipy"              # Flux/图像处理依赖
+
+    - "sentencepiece"      # Florence2 Tokenizer 依赖
+
+    - "protobuf"           # 某些模型加载依赖
+
+    - "einops"             # 必须
+
+    - "accelerate"         # 模型加速加载
+
+    - "opencv-python-headless"
+
+
+
+  run:
+
+    - python3 scripts/install_comfyui.py
+
+    - python3 scripts/install_custom_nodes.py
+
+    - python3 scripts/download_small_models.py
+
+
+
+predict: "predict.py:Predictor"
+
